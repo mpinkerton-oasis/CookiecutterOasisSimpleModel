@@ -13,7 +13,7 @@ Install cookiecutter (if not present):
     
 Run cookiecutter on the source repo (the URI can be specified using either `https` or `git` or `git+ssh`):
 
-    /home/foo$ cookiecutter git+ssh://git@github.com/OasisLMF/cookiecutter-OasisModel
+    /home/foo$ cookiecutter git+{https,ssh}://git@github.com/OasisLMF/CookiecutterOasisSimpleModel
 
 You should see the following prompts for project and model settings in sequence (press ENTER to use default values):
     
@@ -36,9 +36,9 @@ These prompts are self-explanatory, but `project_name`, `project_slug`, `organiz
 * `organization` - this should either be a camel case of the organization name or an acronym
 * `model_identifier` - this should be a short ID for the full name of the initial model, e.g. an acronym of the full model name
 * `model_version` - this can be any meaningful string that indicates a version for the initial model (by default it is set to `0.0.0.1`)
-* `model_lookup_type` - this indicates whether the lookup for the initial model is a custom class (extending the Oasis base keys lookup class) or uses the built-in lookup framework in the MDK; the options are "custom" (default) or "builtin"
+* `model_lookup_type` - "custom" for a custom lookup, or "builtin" for the builtin lookup provided by the MDK 
 
-The project structure is contained in the repo folder named <a href="https://github.com/OasisLMF/cookiecutter-OasisModel/tree/master/%7B%7Bcookiecutter.project_slug%7D%7D" target="_blank">`{{cookiecutter.project_slug}}`</a> and project-related settings such as the project descriptive name, model name and version etc., which are set during runtime via the prompts, are configurable in the repo file <a href="https://github.com/OasisLMF/cookiecutter-OasisModel/blob/master/cookiecutter.json" target="_blank">`cookiecutter.json`</a>.
+The project structure is contained in the repo folder named <a href="https://github.com/OasisLMF/CookiecutterOasisSimpleModel/tree/master/%7B%7Bcookiecutter.project_slug%7D%7D" target="_blank">`{{cookiecutter.project_slug}}`</a> and project-related settings such as the project descriptive name, model name and version etc., which are set during runtime via the prompts, are configurable in the repo file <a href="https://github.com/OasisLMF/CookiecutterOasisSimpleModel/blob/master/cookiecutter.json" target="_blank">`cookiecutter.json`</a>.
 
 For the current state of the <a href="https://github.com/OasisLMF/cookiecutter-OasisModel/tree/master/%7B%7Bcookiecutter.project_slug%7D%7D" target="_blank">`{{cookiecutter.project_slug}}`</a> directory you should see the following project structure in the place where you ran the command (assuming you used default boilerplate values for the project name, organization and model name):
 

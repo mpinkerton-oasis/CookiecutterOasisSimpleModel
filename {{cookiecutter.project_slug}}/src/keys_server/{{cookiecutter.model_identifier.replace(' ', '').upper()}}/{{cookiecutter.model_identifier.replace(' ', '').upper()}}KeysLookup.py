@@ -13,11 +13,12 @@ import pandas as pd
 
 # Oasis utils and other Oasis imports
 
-from oasislmf.keys.lookup import OasisBaseKeysLookup
+from oasislmf.model_preparation.lookup import OasisBaseKeysLookup
+from oasislmf.data.utils import get_ids
 from oasislmf.utils.log import oasis_log
 
-# Model keys server imports
-from utils import *
+# Model-specific subpackage imports
+from .utils import *
 
 class {{cookiecutter.model_identifier.replace(' ', '').upper()}}KeysLookup(OasisBaseKeysLookup):
     """
@@ -25,7 +26,13 @@ class {{cookiecutter.model_identifier.replace(' ', '').upper()}}KeysLookup(Oasis
     """
 
     @oasis_log()
-    def __init__(self, keys_data_directory=None, supplier={{cookiecutter.organization.replace(' ', '')}}, model_name={{cookiecutter.model_identifier.replace(' ', '').upper()}}, model_version=None):
+    def __init__(
+        self,
+        keys_data_directory=None,
+        supplier={{cookiecutter.organization.replace(' ', '')}},
+        model_name={{cookiecutter.model_identifier.replace(' ', '').upper()}},
+        model_version=None
+    ):
         """
         Initialise the static data required for the lookup.
         """
@@ -36,11 +43,15 @@ class {{cookiecutter.model_identifier.replace(' ', '').upper()}}KeysLookup(Oasis
             model_version
         )
         pass
-    
-    
+
     @oasis_log()
     def process_locations(self, loc_df):
         """
-        Process location rows - passed in as a pandas dataframe.
+        Process location rows - passed in as a pandas dataframe. Use ``yield``
+        to generate keys dicts. DO NOT USE ``return``.
         """
-        pass
+        loc_df.columns = loc_df.columns.str.lower()
+        if 'loc_id' not in loc_df:
+            loc_df['loc_id'] = get_ids(loc_df, ['portnumber', 'accnumber', 'locnumber'])
+
+        # Rest of the code here
