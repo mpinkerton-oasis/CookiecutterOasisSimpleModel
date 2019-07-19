@@ -10,8 +10,8 @@ from subprocess import (
 
 
 def setup_git_user():
-    check_call(['git', 'config', '--global', 'user.name', '"{{cookiecutter.project_maintainer.decode("""utf-8""").replace("""\n""", """""")}}"'])
-    check_call(['git', 'config', '--global', 'user.email', '"{{cookiecutter.project_maintainer_email.decode("""utf-8""").replace("""\n""", """""")}}"'])
+    check_call(['git', 'config', '--global', 'user.name', '"{{cookiecutter.project_maintainer}}"'])
+    check_call(['git', 'config', '--global', 'user.email', '"{{cookiecutter.project_maintainer_email}}"'])
 
 
 def create_git_repo():
@@ -25,7 +25,9 @@ if __name__ == '__main__':
     print('\nSetting up Git user and email in global config.')
     time.sleep(2)
     setup_git_user()
-    print('\n\tuser={}, email={}'.format(check_output(['git', 'config', '--global', 'user.name']), check_output(['git', 'config', '--global', 'user.email'])))
+    user_name = check_output(['git', 'config', '--global', 'user.name']).decode('utf-8')
+    user_email = check_output(['git', 'config', '--global', 'user.email']).decode('utf-8')
+    print('\n\tuser={}, email={}'.format(user_name, user_email))
     time.sleep(3)
 
     print('\nCreating local Git repository in {}.\n'.format(cwd))
