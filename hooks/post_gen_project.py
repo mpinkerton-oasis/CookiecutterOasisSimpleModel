@@ -10,8 +10,8 @@ from subprocess import (
 
 
 def setup_git_user():
-    check_call(['git', 'config', '--global', 'user.name', '"{{cookiecutter.project_maintainer}}"'])
-    check_call(['git', 'config', '--global', 'user.email', '"{{cookiecutter.project_maintainer_email}}"'])
+    check_call(['git', 'config', '--global', 'user.name', '"{{cookiecutter.project_maintainer.decode("""utf-8""").replace("""\n""", """""")}}"'])
+    check_call(['git', 'config', '--global', 'user.email', '"{{cookiecutter.project_maintainer_email.decode("""utf-8""").replace("""\n""", """""")}}"'])
 
 
 def create_git_repo():
